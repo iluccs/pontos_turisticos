@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
 
-// Aluno: Lucas Viana dos Santos
-// TP4 - Catalogo de pontos turisticos da Baixada Santista
+
 
 void main() {
   runApp(const TurismoApp());
 }
+// Aluno: Lucas Viana dos Santos
+// TP4 - Catalogo de pontos turisticos da Baixada Santista
 
 class PontoTuristico {
   final String nome;
@@ -106,6 +107,12 @@ PontoTuristico(
   descricao: 'Mirante com vista panoramica do mar, das praias e das rochas do litoral.',
   imagem: 'assets/images/mirante_galhetas.webp',
 ),
+PontoTuristico(
+  nome: 'Ilha do Guaraú',
+  cidade: 'Peruibe',
+  descricao: 'Regiao de beleza natural, com paisagens costeiras e contato com a natureza.',
+  imagem: 'assets/images/ilha_guarau.jpg',
+),
   ];
 
   int get totalFavoritos =>
@@ -118,8 +125,7 @@ PontoTuristico(
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Lucas Viana dos Santos',
+        title: const Text('Pontos Turísticos Baixada Santista',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.blue,
