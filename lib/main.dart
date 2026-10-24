@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Aluno: Lucas Viana dos Santos
-// TP4 - Catalogo de Pontos Turisticos
+// TP4 - Catalogo de Pontos Turisticos da Baixada Santista
 
 void main() {
   runApp(const Principal());
@@ -95,20 +95,63 @@ class _TelaCatalogoState extends State<TelaCatalogo> {
     ),
   ];
 
+  int get totalFavoritos =>
+      pontos.where((ponto) => ponto.favorito).length;
+
+  int get totalVisitados =>
+      pontos.where((ponto) => ponto.visitado).length;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lucas Viana dos Santos'),
+        title: const Text(
+          'Lucas Viana dos Santos',
+          style: TextStyle(fontSize: 18),
+        ),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(12),
-        itemCount: pontos.length,
-        itemBuilder: (context, index) {
-          return criarCard(pontos[index]);
-        },
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.blue.shade50,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    const Icon(Icons.favorite, color: Colors.red),
+                    const SizedBox(height: 4),
+                    Text('Favoritos: $totalFavoritos'),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const Icon(Icons.check_circle, color: Colors.green),
+                    const SizedBox(height: 4),
+                    Text('Visitados: $totalVisitados'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(12),
+              itemCount: pontos.length,
+              itemBuilder: (context, index) {
+                return criarCard(pontos[index]);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -149,7 +192,17 @@ class _TelaCatalogoState extends State<TelaCatalogo> {
                   ),
                 ),
                 const SizedBox(height: 5),
-                Text(ponto.cidade),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.location_on,
+                      color: Colors.blue,
+                      size: 18,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(ponto.cidade),
+                  ],
+                ),
                 const SizedBox(height: 8),
                 Text(ponto.descricao),
                 const SizedBox(height: 8),
