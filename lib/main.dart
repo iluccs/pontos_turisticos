@@ -29,19 +29,28 @@ class PontoTuristico {
   final String cidade;
   final String descricao;
   final String imagem;
+  bool favorito;
+  bool visitado;
 
-  const PontoTuristico({
+  PontoTuristico({
     required this.nome,
     required this.cidade,
     required this.descricao,
     required this.imagem,
+    this.favorito = false,
+    this.visitado = false,
   });
 }
 
-class TelaCatalogo extends StatelessWidget {
+class TelaCatalogo extends StatefulWidget {
   const TelaCatalogo({super.key});
 
-  final List<PontoTuristico> pontos = const [
+  @override
+  State<TelaCatalogo> createState() => _TelaCatalogoState();
+}
+
+class _TelaCatalogoState extends State<TelaCatalogo> {
+  final List<PontoTuristico> pontos = [
     PontoTuristico(
       nome: 'Orla de Santos',
       cidade: 'Santos',
@@ -127,7 +136,7 @@ class TelaCatalogo extends StatelessWidget {
               );
             },
           ),
-          Container(
+          Padding(
             padding: const EdgeInsets.all(12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,15 +149,40 @@ class TelaCatalogo extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 5),
-                Row(
-                  children: [
-                    const Icon(Icons.location_on, color: Colors.blue),
-                    const SizedBox(width: 4),
-                    Text(ponto.cidade),
-                  ],
-                ),
+                Text(ponto.cidade),
                 const SizedBox(height: 8),
                 Text(ponto.descricao),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CheckboxListTile(
+                        contentPadding: EdgeInsets.zero,
+                        dense: true,
+                        title: const Text('Favorito'),
+                        value: ponto.favorito,
+                        onChanged: (valor) {
+                          setState(() {
+                            ponto.favorito = valor ?? false;
+                          });
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: CheckboxListTile(
+                        contentPadding: EdgeInsets.zero,
+                        dense: true,
+                        title: const Text('Visitado'),
+                        value: ponto.visitado,
+                        onChanged: (valor) {
+                          setState(() {
+                            ponto.visitado = valor ?? false;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
