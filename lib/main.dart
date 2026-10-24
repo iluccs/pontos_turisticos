@@ -1,27 +1,11 @@
+
 import 'package:flutter/material.dart';
 
 // Aluno: Lucas Viana dos Santos
-// TP4 - Catalogo de Pontos Turisticos da Baixada Santista
+// TP4 - Catalogo de pontos turisticos da Baixada Santista
 
 void main() {
-  runApp(const Principal());
-}
-
-class Principal extends StatelessWidget {
-  const Principal({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Turismo na Baixada Santista',
-      theme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-        useMaterial3: true,
-      ),
-      home: const TelaCatalogo(),
-    );
-  }
+  runApp(const TurismoApp());
 }
 
 class PontoTuristico {
@@ -42,57 +26,86 @@ class PontoTuristico {
   });
 }
 
-class TelaCatalogo extends StatefulWidget {
-  const TelaCatalogo({super.key});
+class TurismoApp extends StatelessWidget {
+  const TurismoApp({super.key});
 
   @override
-  State<TelaCatalogo> createState() => _TelaCatalogoState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Turismo na Baixada Santista',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+      ),
+      home: const TelaTurismo(),
+    );
+  }
 }
 
-class _TelaCatalogoState extends State<TelaCatalogo> {
+class TelaTurismo extends StatefulWidget {
+  const TelaTurismo({super.key});
+
+  @override
+  State<TelaTurismo> createState() => _TelaTurismoState();
+}
+
+class _TelaTurismoState extends State<TelaTurismo> {
   final List<PontoTuristico> pontos = [
     PontoTuristico(
       nome: 'Orla de Santos',
       cidade: 'Santos',
-      descricao: 'Jardins, ciclovia e paisagem a beira-mar.',
-      imagem: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
+      descricao: 'Jardins a beira-mar e ciclovia.',
+      imagem: 'assets/images/orla_santos.jpg',
     ),
     PontoTuristico(
       nome: 'Aquario Municipal',
       cidade: 'Santos',
-      descricao: 'Atracao dedicada a vida marinha.',
-      imagem: 'https://images.unsplash.com/photo-1545670723-196ed0954986',
+      descricao: 'Atracao tradicional com especies marinhas.',
+      imagem: 'assets/images/aquario_santos.jpg',
     ),
     PontoTuristico(
       nome: 'Museu do Cafe',
       cidade: 'Santos',
-      descricao: 'Museu sobre a historia do cafe.',
-      imagem: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0',
+      descricao: 'Historia do cafe em um edificio historico.',
+      imagem: 'assets/images/museu_cafe.jpg',
     ),
     PontoTuristico(
       nome: 'Ilha Porchat',
       cidade: 'Sao Vicente',
-      descricao: 'Local conhecido por seus mirantes.',
-      imagem: 'https://images.unsplash.com/photo-1519046904884-53103b34b206',
+      descricao: 'Vista panoramica da regiao costeira.',
+      imagem: 'assets/images/ilha_porchat.jpg',
     ),
     PontoTuristico(
       nome: 'Morro do Maluf',
       cidade: 'Guaruja',
-      descricao: 'Mirantes com vista para a Praia da Enseada.',
-      imagem: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21',
+      descricao: 'Mirante com vista para o mar e as praias.',
+      imagem: 'assets/images/morro_maluf.jpg',
     ),
     PontoTuristico(
-      nome: 'Praia do Cibratel',
-      cidade: 'Itanhaem',
-      descricao: 'Praia para passeios e lazer.',
-      imagem: 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda',
+      nome: 'Praia do Gonzaga',
+      cidade: 'Santos',
+      descricao: 'Praia movimentada com comercios e lazer.',
+      imagem: 'assets/images/praia_gonzaga.jpg',
     ),
     PontoTuristico(
       nome: 'Plataforma de Pesca',
       cidade: 'Mongagua',
-      descricao: 'Local tradicional para pesca e contemplacao do mar.',
-      imagem: 'https://images.unsplash.com/photo-1509233725247-49e657c54213',
+      descricao: 'Estrutura conhecida para pesca e passeio.',
+      imagem: 'assets/images/plataforma_mongagua.jpg',
     ),
+    PontoTuristico(
+  nome: 'Morro do Cibratel',
+  cidade: 'Itanhaem',
+  descricao: 'Local para apreciar a paisagem do litoral.',
+  imagem: 'assets/images/morro_cibratel.jpg',
+),
+PontoTuristico(
+  nome: 'Mirante das Galhetas',
+  cidade: 'Guaruja',
+  descricao: 'Mirante com vista panoramica do mar, das praias e das rochas do litoral.',
+  imagem: 'assets/images/mirante_galhetas.webp',
+),
   ];
 
   int get totalFavoritos =>
@@ -107,35 +120,41 @@ class _TelaCatalogoState extends State<TelaCatalogo> {
       appBar: AppBar(
         title: const Text(
           'Lucas Viana dos Santos',
-          style: TextStyle(fontSize: 18),
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
           Container(
-            width: double.infinity,
-            margin: const EdgeInsets.all(12),
-            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: Colors.blue.shade50,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
+                Row(
                   children: [
-                    const Icon(Icons.favorite, color: Colors.red),
-                    const SizedBox(height: 4),
+                    const Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 5),
                     Text('Favoritos: $totalFavoritos'),
                   ],
                 ),
-                Column(
+                Row(
                   children: [
-                    const Icon(Icons.check_circle, color: Colors.green),
-                    const SizedBox(height: 4),
+                    const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 5),
                     Text('Visitados: $totalVisitados'),
                   ],
                 ),
@@ -143,9 +162,16 @@ class _TelaCatalogoState extends State<TelaCatalogo> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(12),
+            child: GridView.builder(
+              padding: const EdgeInsets.fromLTRB(120, 12, 120, 12),
               itemCount: pontos.length,
+              gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.92,
+              ),
               itemBuilder: (context, index) {
                 return criarCard(pontos[index]);
               },
@@ -158,83 +184,116 @@ class _TelaCatalogoState extends State<TelaCatalogo> {
 
   Widget criarCard(PontoTuristico ponto) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 16),
+      margin: EdgeInsets.zero,
       clipBehavior: Clip.antiAlias,
-      elevation: 3,
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Image.network(
-            ponto.imagem,
-            height: 180,
-            width: double.infinity,
-            fit: BoxFit.cover,
-            errorBuilder: (context, erro, stackTrace) {
-              return Container(
-                height: 180,
-                color: Colors.blueGrey.shade100,
-                child: const Center(
-                  child: Icon(Icons.image_not_supported, size: 40),
-                ),
-              );
-            },
+          Expanded(
+            child: Image.asset(
+              ponto.imagem,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  color: Colors.grey.shade300,
+                  child: const Icon(
+                    Icons.image_not_supported,
+                    size: 35,
+                    color: Colors.grey,
+                  ),
+                );
+              },
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.fromLTRB(7, 6, 7, 2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   ponto.nome,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 13,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 3),
                 Row(
                   children: [
                     const Icon(
                       Icons.location_on,
+                      size: 13,
                       color: Colors.blue,
-                      size: 18,
                     ),
-                    const SizedBox(width: 4),
-                    Text(ponto.cidade),
+                    const SizedBox(width: 2),
+                    Expanded(
+                      child: Text(
+                        ponto.cidade,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                    ),
                   ],
                 ),
-                const SizedBox(height: 8),
-                Text(ponto.descricao),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CheckboxListTile(
-                        contentPadding: EdgeInsets.zero,
-                        dense: true,
-                        title: const Text('Favorito'),
-                        value: ponto.favorito,
-                        onChanged: (valor) {
-                          setState(() {
-                            ponto.favorito = valor ?? false;
-                          });
-                        },
-                      ),
+                const SizedBox(height: 3),
+                Text(
+                  ponto.descricao,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 10),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3),
+            child: Row(
+              children: [
+                Expanded(
+                  child: CheckboxListTile(
+                    dense: true,
+                    visualDensity: VisualDensity.compact,
+                    contentPadding: EdgeInsets.zero,
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: const Text(
+                      'Favorito',
+                      style: TextStyle(fontSize: 9),
                     ),
-                    Expanded(
-                      child: CheckboxListTile(
-                        contentPadding: EdgeInsets.zero,
-                        dense: true,
-                        title: const Text('Visitado'),
-                        value: ponto.visitado,
-                        onChanged: (valor) {
-                          setState(() {
-                            ponto.visitado = valor ?? false;
-                          });
-                        },
-                      ),
+                    value: ponto.favorito,
+                    activeColor: Colors.red,
+                    onChanged: (valor) {
+                      setState(() {
+                        ponto.favorito = valor ?? false;
+                      });
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: CheckboxListTile(
+                    dense: true,
+                    visualDensity: VisualDensity.compact,
+                    contentPadding: EdgeInsets.zero,
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: const Text(
+                      'Visitado',
+                      style: TextStyle(fontSize: 9),
                     ),
-                  ],
+                    value: ponto.visitado,
+                    activeColor: Colors.green,
+                    onChanged: (valor) {
+                      setState(() {
+                        ponto.visitado = valor ?? false;
+                      });
+                    },
+                  ),
                 ),
               ],
             ),
